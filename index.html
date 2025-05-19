@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyWings - Airline Booking System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Auth Container (Initially shown) -->
+    <div class="auth-container" id="auth-container">
+        <div class="auth-left">
+            <h1>Welcome to SkyWings</h1>
+            <p>Manage your airline operations with our comprehensive booking and management system. Streamline your workflow and enhance customer experience.</p>
+            
+            <div class="auth-features">
+                <div class="auth-feature">
+                    <i class="fas fa-plane"></i>
+                    <span>Real-time flight management</span>
+                </div>
+                <div class="auth-feature">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Advanced analytics and reporting</span>
+                </div>
+                <div class="auth-feature">
+                    <i class="fas fa-users"></i>
+                    <span>Customer relationship management</span>
+                </div>
+                <div class="auth-feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure and reliable platform</span>
+                </div>
+            </div>
+        </div>
+        <div class="auth-right">
+            <div class="auth-form-container">
+                <div class="auth-logo">
+                    <h2><i class="fas fa-plane"></i> SkyWings</h2>
+                </div>
+                
+                <div class="auth-tabs">
+                    <div class="auth-tab active" data-tab="login">Login</div>
+                    <div class="auth-tab" data-tab="register">Register</div>
+                </div>
+                
+                <!-- Login Form -->
+                <form id="login-form" class="auth-form active">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group password-toggle">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required>
+                        <i class="fas fa-eye password-toggle-icon" id="toggle-login-password"></i>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="remember-me"> Remember me
+                        </label>
+                        <a href="#" id="forgot-password" style="float: right;">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block" id="login-btn">
+                        <span id="login-btn-text">Login</span>
+                        <span class="loading-spinner" id="login-spinner" style="display: none;"></span>
+                    </button>
+                    
+                    <div class="social-auth">
+                        <p>Or login with</p>
+                        <div class="social-buttons">
+                            <button type="button" class="social-btn google">
+                                <i class="fab fa-google"></i> Google
+                            </button>
+                            <button type="button" class="social-btn facebook">
+                                <i class="fab fa-facebook-f"></i> Facebook
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="auth-footer">
+                        Don't have an account? <a href="#" id="show-register">Register here</a>
+                    </div>
+                </form>
+                
+                <!-- Register Form -->
+                <form id="register-form" class="auth-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="register-first-name">First Name</label>
+                            <input type="text" id="register-first-name" class="form-control" placeholder="Enter your first name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-last-name">Last Name</label>
+                            <input type="text" id="register-last-name" class="form-control" placeholder="Enter your last name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group password-toggle">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" class="form-control" placeholder="Create a password" required>
+                        <i class="fas fa-eye password-toggle-icon" id="toggle-register-password"></i>
+                    </div>
+                    
+                    <div class="form-group password-toggle">
+                        <label for="register-confirm-password">Confirm Password</label>
+                        <input type="password" id="register-confirm-password" class="form-control" placeholder="Confirm your password" required>
+                        <i class="fas fa-eye password-toggle-icon" id="toggle-register-confirm-password"></i>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="agree-terms" required> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block" id="register-btn">
+                        <span id="register-btn-text">Register</span>
+                        <span class="loading-spinner" id="register-spinner" style="display: none;"></span>
+                    </button>
+                    
+                    <div class="auth-footer">
+                        Already have an account? <a href="#" id="show-login">Login here</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Application Container (Initially hidden) -->
+    <div class="container" id="app-container" style="display: none;">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-plane"></i> SkyWings</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active" data-section="dashboard"><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li data-section="flights"><a href="#"><i class="fas fa-plane-departure"></i> Flights</a></li>
+                    <li data-section="bookings"><a href="#"><i class="fas fa-ticket-alt"></i> Bookings</a></li>
+                    <li data-section="passengers"><a href="#"><i class="fas fa-users"></i> Passengers</a></li>
+                    <li data-section="schedule"><a href="#"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
+                    <li data-section="reports"><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/40" alt="User" id="user-avatar">
+                    <div>
+                        <span class="username" id="username-display">Admin User</span>
+                        <span class="role" id="user-role">Administrator</span>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="main-header">
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="header-left">
+                    <h1 id="page-title">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search..." id="global-search">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="notifications" id="notifications-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge" id="notification-count">3</span>
+                    </div>
+                    <div class="dark-mode-toggle">
+                        <i class="fas fa-moon"></i>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="dark-mode-toggle">
+                            <span class="slider"></span>
+                        </label>
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="language-selector">
+                        <select id="language-select">
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="welcome-banner">
+                    <div class="welcome-content">
+                        <h2>Welcome back, <span id="welcome-name">Admin</span>!</h2>
+                        <p>Here's what's happening with your airline operations today.</p>
+                    </div>
+                    <div class="welcome-actions">
+                        <button class="btn btn-primary" id="refresh-dashboard"><i class="fas fa-sync-alt"></i> Refresh Data</button>
+                        <div class="date-display">
+                            <i class="far fa-calendar-alt"></i>
+                            <span id="current-date">May 4, 2023</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-cards">
+                    <div class="stat-card clickable" id="flights-stat">
+                        <div class="stat-icon bg-blue">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Flights</h3>
+                            <span class="stat-number" id="total-flights">0</span>
+                            <span class="stat-trend up"><i class="fas fa-arrow-up"></i> 12%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card clickable" id="bookings-stat">
+                        <div class="stat-icon bg-green">
+                            <i class="fas fa-ticket-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Today's Bookings</h3>
+                            <span class="stat-number" id="today-bookings">0</span>
+                            <span class="stat-trend up"><i class="fas fa-arrow-up"></i> 8%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card clickable" id="passengers-stat">
+                        <div class="stat-icon bg-orange">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Passengers</h3>
+                            <span class="stat-number" id="total-passengers">0</span>
+                            <span class="stat-trend up"><i class="fas fa-arrow-up"></i> 15%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card clickable" id="delayed-stat">
+                        <div class="stat-icon bg-red">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Delayed Flights</h3>
+                            <span class="stat-number" id="delayed-flights">0</span>
+                            <span class="stat-trend down"><i class="fas fa-arrow-down"></i> 5%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-content">
+                    <div class="dashboard-row">
+                        <div class="bookings-chart">
+                            <div class="chart-header">
+                                <h3>Recent Bookings</h3>
+                                <div class="chart-period">
+                                    <button class="period-btn active" data-period="week">Week</button>
+                                    <button class="period-btn" data-period="month">Month</button>
+                                    <button class="period-btn" data-period="year">Year</button>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="bookingsChart"></canvas>
+                            </div>
+                            <div class="chart-summary">
+                                <div class="summary-item">
+                                    <span class="summary-label">Total Revenue</span>
+                                    <span class="summary-value">$1,245,678</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Avg. Ticket Price</span>
+                                    <span class="summary-value">$350</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Conversion Rate</span>
+                                    <span class="summary-value">68%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="quick-actions">
+                            <h3>Quick Actions</h3>
+                            <div class="action-buttons">
+                                <button class="action-btn" id="new-flight-btn">
+                                    <i class="fas fa-plane"></i>
+                                    <span>New Flight</span>
+                                </button>
+                                <button class="action-btn" id="new-booking-btn">
+                                    <i class="fas fa-ticket-alt"></i>
+                                    <span>New Booking</span>
+                                </button>
+                                <button class="action-btn" id="add-passenger-btn">
+                                    <i class="fas fa-user-plus"></i>
+                                    <span>Add Passenger</span>
+                                </button>
+                                <button class="action-btn" id="generate-report-btn">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span>Generate Report</span>
+                                </button>
+                            </div>
+                            <div class="system-status">
+                                <h4>System Status</h4>
+                                <div class="status-item">
+                                    <span>Server Load</span>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 35%"></div>
+                                    </div>
+                                    <span>35%</span>
+                                </div>
+                                <div class="status-item">
+                                    <span>Database</span>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 62%"></div>
+                                    </div>
+                                    <span>62%</span>
+                                </div>
+                                <div class="status-item">
+                                    <span>API Health</span>
+                                    <div class="status-badge healthy">Healthy</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-row">
+                        <div class="recent-bookings">
+                            <div class="section-header-inline">
+                                <h3>Recent Bookings</h3>
+                                <div class="header-actions">
+                                    <button class="btn-icon refresh-btn" title="Refresh" id="refresh-bookings"><i class="fas fa-sync-alt"></i></button>
+                                    <button class="btn-icon filter-btn" title="Filter" id="filter-bookings"><i class="fas fa-filter"></i></button>
+                                </div>
+                            </div>
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Booking ID</th>
+                                            <th>Passenger</th>
+                                            <th>Flight</th>
+                                            <th>Departure</th>
+                                            <th>Seat</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recent-bookings-table">
+                                        <!-- Filled by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="view-all">
+                                <a href="#" class="view-all-link" id="view-all-bookings">View All Bookings <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="upcoming-flights">
+                            <div class="section-header-inline">
+                                <h3>Upcoming Flights</h3>
+                                <div class="header-actions">
+                                    <button class="btn-icon refresh-btn" title="Refresh" id="refresh-flights"><i class="fas fa-sync-alt"></i></button>
+                                    <button class="btn-icon filter-btn" title="Filter" id="filter-flights"><i class="fas fa-filter"></i></button>
+                                </div>
+                            </div>
+                            <div class="flights-list" id="flights-list">
+                                <!-- Filled by JavaScript -->
+                            </div>
+                            <div class="view-all">
+                                <a href="#" class="view-all-link" id="view-all-flights">View All Flights <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Flights Section -->
+            <section id="flights" class="content-section">
+                <div class="section-header">
+                    <h2>Flight Management</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" id="add-flight-btn-2">
+                            <i class="fas fa-plus"></i> Add Flight
+                        </button>
+                        <div class="search-filter">
+                            <input type="text" id="flight-search" placeholder="Search flights...">
+                            <select id="flight-filter">
+                                <option value="all">All Flights</option>
+                                <option value="scheduled">Scheduled</option>
+                                <option value="departed">Departed</option>
+                                <option value="arrived">Arrived</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                            <button class="btn btn-secondary" id="advanced-flight-filter">
+                                <i class="fas fa-sliders-h"></i> Advanced
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flight-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-blue">
+                            <i class="fas fa-plane-departure"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Departures Today</h3>
+                            <span class="stat-number">42</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-green">
+                            <i class="fas fa-plane-arrival"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Arrivals Today</h3>
+                            <span class="stat-number">38</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-orange">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>On-Time Performance</h3>
+                            <span class="stat-number">92%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-red">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Cancellations</h3>
+                            <span class="stat-number">3</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Flight No.</th>
+                                <th>Route</th>
+                                <th>Departure</th>
+                                <th>Arrival</th>
+                                <th>Aircraft</th>
+                                <th>Seats</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="flights-table">
+                            <!-- Filled by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <button class="btn" id="prev-flight-page"><i class="fas fa-chevron-left"></i></button>
+                    <span id="flight-page-info">Page 1 of 1</span>
+                    <button class="btn" id="next-flight-page"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
+
+            <!-- Bookings Section -->
+            <section id="bookings" class="content-section">
+                <div class="section-header">
+                    <h2>Booking Management</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" id="add-booking-btn-2">
+                            <i class="fas fa-plus"></i> New Booking
+                        </button>
+                        <div class="search-filter">
+                            <input type="text" id="booking-search" placeholder="Search bookings...">
+                            <select id="booking-filter">
+                                <option value="all">All Bookings</option>
+                                <option value="confirmed">Confirmed</option>
+                                <option value="pending">Pending</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                            <button class="btn btn-secondary" id="advanced-booking-filter">
+                                <i class="fas fa-sliders-h"></i> Advanced
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="booking-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-blue">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Today</h3>
+                            <span class="stat-number">42</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Confirmed</h3>
+                            <span class="stat-number">156</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-orange">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Pending</h3>
+                            <span class="stat-number">28</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-red">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Cancelled</h3>
+                            <span class="stat-number">14</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-insights">
+                    <div class="insight-card">
+                        <h3>Booking Trends</h3>
+                        <div class="chart-container small">
+                            <canvas id="bookingTrendsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="insight-card">
+                        <h3>Revenue by Class</h3>
+                        <div class="chart-container small">
+                            <canvas id="revenueByClassChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="insight-card">
+                        <h3>Top Routes</h3>
+                        <ul class="top-routes-list">
+                            <li>
+                                <span class="route-name">JFK → LAX</span>
+                                <span class="route-value">$245,678</span>
+                            </li>
+                            <li>
+                                <span class="route-name">LHR → CDG</span>
+                                <span class="route-value">$198,342</span>
+                            </li>
+                            <li>
+                                <span class="route-name">DXB → SIN</span>
+                                <span class="route-value">$176,890</span>
+                            </li>
+                            <li>
+                                <span class="route-name">HND → ICN</span>
+                                <span class="route-value">$145,230</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Passenger</th>
+                                <th>Flight</th>
+                                <th>Departure</th>
+                                <th>Seat</th>
+                                <th>Class</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookings-table">
+                            <!-- Filled by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <button class="btn" id="prev-booking-page"><i class="fas fa-chevron-left"></i></button>
+                    <span id="booking-page-info">Page 1 of 1</span>
+                    <button class="btn" id="next-booking-page"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
+
+            <!-- Passengers Section -->
+            <section id="passengers" class="content-section">
+                <div class="section-header">
+                    <h2>Passenger Management</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" id="add-passenger-btn-2">
+                            <i class="fas fa-plus"></i> Add Passenger
+                        </button>
+                        <div class="search-filter">
+                            <input type="text" id="passenger-search" placeholder="Search passengers...">
+                            <select id="passenger-filter">
+                                <option value="all">All Passengers</option>
+                                <option value="frequent">Frequent Flyers</option>
+                                <option value="vip">VIP</option>
+                            </select>
+                            <button class="btn btn-secondary" id="import-passengers">
+                                <i class="fas fa-file-import"></i> Import
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="passenger-insights">
+                    <div class="insight-card">
+                        <h3>Passenger Demographics</h3>
+                        <div class="chart-container small">
+                            <canvas id="demographicsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="insight-card">
+                        <h3>Loyalty Program</h3>
+                        <div class="loyalty-stats">
+                            <div class="loyalty-item">
+                                <div class="loyalty-icon gold">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <div class="loyalty-info">
+                                    <span class="loyalty-name">Gold</span>
+                                    <span class="loyalty-count">124 members</span>
+                                </div>
+                            </div>
+                            <div class="loyalty-item">
+                                <div class="loyalty-icon silver">
+                                    <i class="fas fa-medal"></i>
+                                </div>
+                                <div class="loyalty-info">
+                                    <span class="loyalty-name">Silver</span>
+                                    <span class="loyalty-count">256 members</span>
+                                </div>
+                            </div>
+                            <div class="loyalty-item">
+                                <div class="loyalty-icon bronze">
+                                    <i class="fas fa-award"></i>
+                                </div>
+                                <div class="loyalty-info">
+                                    <span class="loyalty-name">Bronze</span>
+                                    <span class="loyalty-count">512 members</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insight-card">
+                        <h3>Recent Activity</h3>
+                        <div class="activity-feed">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>New passenger registered</p>
+                                    <span class="activity-time">10 minutes ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-ticket-alt"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>Booking #BK-1005 updated</p>
+                                    <span class="activity-time">1 hour ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>Passenger upgraded to Gold status</p>
+                                    <span class="activity-time">3 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Passport</th>
+                                <th>Nationality</th>
+                                <th>Contact</th>
+                                <th>Miles</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="passengers-table">
+                            <!-- Filled by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <button class="btn" id="prev-passenger-page"><i class="fas fa-chevron-left"></i></button>
+                    <span id="passenger-page-info">Page 1 of 1</span>
+                    <button class="btn" id="next-passenger-page"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
+
+            <!-- Schedule Section -->
+            <section id="schedule" class="content-section">
+                <div class="section-header">
+                    <h2>Flight Schedule</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" id="generate-schedule-btn">
+                            <i class="fas fa-calendar-plus"></i> Generate Schedule
+                        </button>
+                        <div class="date-navigation">
+                            <button class="btn" id="prev-week-btn"><i class="fas fa-chevron-left"></i></button>
+                            <span id="current-week">Week of May 1, 2023</span>
+                            <button class="btn" id="next-week-btn"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="schedule-view-options">
+                    <button class="view-option active" data-view="week" id="week-view">Week</button>
+                    <button class="view-option" data-view="month" id="month-view">Month</button>
+                    <button class="view-option" data-view="list" id="list-view">List</button>
+                </div>
+                
+                <div class="schedule-view">
+                    <div class="schedule-header">
+                        <div class="time-column">Time</div>
+                        <div class="day-column">Monday</div>
+                        <div class="day-column">Tuesday</div>
+                        <div class="day-column">Wednesday</div>
+                        <div class="day-column">Thursday</div>
+                        <div class="day-column">Friday</div>
+                    </div>
+                    <div class="schedule-body" id="schedule-body">
+                        <!-- Filled by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="schedule-legend">
+                    <div class="legend-item">
+                        <span class="legend-color" style="background-color: #dbeafe;"></span>
+                        <span>Scheduled</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background-color: #dcfce7;"></span>
+                        <span>Departed</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background-color: #fef9c3;"></span>
+                        <span>Delayed</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background-color: #fee2e2;"></span>
+                        <span>Cancelled</span>
+                    </div>
+                </div>
+
+                <div class="schedule-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-blue">
+                            <i class="fas fa-plane-departure"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Flights This Week</h3>
+                            <span class="stat-number">142</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>On-Time Departures</h3>
+                            <span class="stat-number">92%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-orange">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Average Delay</h3>
+                            <span class="stat-number">18 min</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-red">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Cancellations</h3>
+                            <span class="stat-number">3</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="content-section">
+                <div class="section-header">
+                    <h2>Reports & Analytics</h2>
+                    <div class="section-actions">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="generate-report-btn-2">
+                                <i class="fas fa-file-export"></i> Export Report
+                            </button>
+                            <button class="btn btn-secondary" id="schedule-report-btn">
+                                <i class="fas fa-clock"></i> Schedule
+                            </button>
+                            <button class="btn btn-secondary" id="share-report-btn">
+                                <i class="fas fa-share-alt"></i> Share
+                            </button>
+                        </div>
+                        <div class="report-period">
+                            <select id="report-period">
+                                <option value="week">This Week</option>
+                                <option value="month">This Month</option>
+                                <option value="quarter">This Quarter</option>
+                                <option value="year">This Year</option>
+                                <option value="custom">Custom Range</option>
+                            </select>
+                            <div id="custom-range" class="custom-date-range">
+                                <input type="date" id="start-date">
+                                <span>to</span>
+                                <input type="date" id="end-date">
+                                <button class="btn btn-small" id="apply-date-range">Apply</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="report-tabs">
+                    <button class="report-tab active" data-report="overview" id="overview-tab">Overview</button>
+                    <button class="report-tab" data-report="revenue" id="revenue-tab">Revenue</button>
+                    <button class="report-tab" data-report="occupancy" id="occupancy-tab">Occupancy</button>
+                    <button class="report-tab" data-report="routes" id="routes-tab">Routes</button>
+                    <button class="report-tab" data-report="custom" id="custom-tab">Custom</button>
+                </div>
+                
+                <div class="report-content">
+                    <div class="report-overview active" data-report-content="overview">
+                        <div class="report-summary">
+                            <div class="summary-card">
+                                <h3>Total Revenue</h3>
+                                <div class="summary-value">$1,245,678</div>
+                                <div class="summary-trend up">+12.5% vs last period</div>
+                            </div>
+                            <div class="summary-card">
+                                <h3>Bookings</h3>
+                                <div class="summary-value">8,456</div>
+                                <div class="summary-trend up">+8.3% vs last period</div>
+                            </div>
+                            <div class="summary-card">
+                                <h3>Avg. Occupancy</h3>
+                                <div class="summary-value">78.2%</div>
+                                <div class="summary-trend up">+3.1% vs last period</div>
+                            </div>
+                            <div class="summary-card">
+                                <h3>Cancellations</h3>
+                                <div class="summary-value">342</div>
+                                <div class="summary-trend down">-5.7% vs last period</div>
+                            </div>
+                        </div>
+                        
+                        <div class="report-charts">
+                            <div class="chart-container">
+                                <h3>Flight Occupancy</h3>
+                                <canvas id="occupancyChart"></canvas>
+                            </div>
+                            <div class="chart-container">
+                                <h3>Revenue by Route</h3>
+                                <canvas id="revenueChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="report-stats">
+                            <div class="stat-box">
+                                <h3>Top Routes</h3>
+                                <ul id="top-routes-list">
+                                    <li>
+                                        <span class="route-name">JFK → LAX</span>
+                                        <span class="route-percentage">24%</span>
+                                    </li>
+                                    <li>
+                                        <span class="route-name">LHR → CDG</span>
+                                        <span class="route-percentage">18%</span>
+                                    </li>
+                                    <li>
+                                        <span class="route-name">DXB → SIN</span>
+                                        <span class="route-percentage">15%</span>
+                                    </li>
+                                    <li>
+                                        <span class="route-name">HND → ICN</span>
+                                        <span class="route-percentage">12%</span>
+                                    </li>
+                                    <li>
+                                        <span class="route-name">SYD → MEL</span>
+                                        <span class="route-percentage">9%</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="stat-box">
+                                <h3>Passenger Demographics</h3>
+                                <div class="demographics-stats">
+                                    <div class="demo-stat">
+                                        <span class="demo-label">Business</span>
+                                        <div class="demo-bar">
+                                            <div class="demo-fill" style="width: 30%;"></div>
+                                        </div>
+                                        <span class="demo-percent">30%</span>
+                                    </div>
+                                    <div class="demo-stat">
+                                        <span class="demo-label">Economy</span>
+                                        <div class="demo-bar">
+                                            <div class="demo-fill" style="width: 65%;"></div>
+                                        </div>
+                                        <span class="demo-percent">65%</span>
+                                    </div>
+                                    <div class="demo-stat">
+                                        <span class="demo-label">First</span>
+                                        <div class="demo-bar">
+                                            <div class="demo-fill" style="width: 5%;"></div>
+                                        </div>
+                                        <span class="demo-percent">5%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Other report tabs content would go here -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Modal Overlay -->
+        <div class="modal-overlay" id="modal-overlay"></div>
+
+        <!-- Add Flight Modal -->
+        <div class="modal" id="add-flight-modal">
+            <div class="modal-header">
+                <h3>Add New Flight</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="flight-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="flight-number">Flight Number</label>
+                            <input type="text" id="flight-number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="aircraft">Aircraft</label>
+                            <select id="aircraft" required>
+                                <option value="">Select Aircraft</option>
+                                <option value="N123SW">Boeing 737-800 (N123SW)</option>
+                                <option value="N456SW">Airbus A320 (N456SW)</option>
+                                <option value="N789SW">Boeing 787-9 (N789SW)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="departure-airport">Departure Airport</label>
+                            <input type="text" id="departure-airport" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="arrival-airport">Arrival Airport</label>
+                            <input type="text" id="arrival-airport" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="departure-time">Departure Time</label>
+                            <input type="datetime-local" id="departure-time" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="arrival-time">Arrival Time</label>
+                            <input type="datetime-local" id="arrival-time" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="flight-status">Status</label>
+                            <select id="flight-status">
+                                <option value="scheduled">Scheduled</option>
+                                <option value="delayed">Delayed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="flight-type">Flight Type</label>
+                            <select id="flight-type">
+                                <option value="domestic">Domestic</option>
+                                <option value="international">International</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Flight</button>
+                        <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Add Booking Modal -->
+        <div class="modal" id="add-booking-modal">
+            <div class="modal-header">
+                <h3>New Booking</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="booking-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="booking-passenger">Passenger</label>
+                            <select id="booking-passenger" required>
+                                <option value="">Select Passenger</option>
+                                <!-- Filled by JavaScript -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="booking-flight">Flight</label>
+                            <select id="booking-flight" required>
+                                <option value="">Select Flight</option>
+                                <!-- Filled by JavaScript -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="booking-seat">Seat</label>
+                            <div class="seat-selection">
+                                <input type="text" id="booking-seat" required readonly>
+                                <button type="button" class="btn btn-small" id="select-seat-btn">Select Seat</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="booking-class">Class</label>
+                            <select id="booking-class" required>
+                                <option value="economy">Economy</option>
+                                <option value="business">Business</option>
+                                <option value="first">First Class</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="booking-price">Price</label>
+                            <input type="number" id="booking-price" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="booking-status">Status</label>
+                            <select id="booking-status">
+                                <option value="confirmed">Confirmed</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-notes">Special Requests</label>
+                        <textarea id="booking-notes" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Create Booking</button>
+                        <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Add Passenger Modal -->
+        <div class="modal" id="add-passenger-modal">
+            <div class="modal-header">
+                <h3>Add New Passenger</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="passenger-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="passenger-first-name">First Name</label>
+                            <input type="text" id="passenger-first-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="passenger-last-name">Last Name</label>
+                            <input type="text" id="passenger-last-name" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="passenger-dob">Date of Birth</label>
+                            <input type="date" id="passenger-dob" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="passenger-gender">Gender</label>
+                            <select id="passenger-gender" required>
+                                <option value="">Select</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="passenger-passport">Passport Number</label>
+                            <input type="text" id="passenger-passport" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="passenger-nationality">Nationality</label>
+                            <input type="text" id="passenger-nationality" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="passenger-phone">Phone</label>
+                            <input type="tel" id="passenger-phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="passenger-email">Email</label>
+                            <input type="email" id="passenger-email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="passenger-notes">Special Requests</label>
+                        <textarea id="passenger-notes" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Loyalty Program</label>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" id="loyalty-program"> Enroll in Loyalty Program
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Passenger</button>
+                        <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Seat Selection Modal -->
+        <div class="modal" id="seat-selection-modal">
+            <div class="modal-header">
+                <h3>Select Seat</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="seat-map">
+                    <div class="seat-map-header">
+                        <div class="aircraft-model">Boeing 737-800</div>
+                        <div class="seat-class-filter">
+                            <button class="btn btn-small active" data-class="all">All</button>
+                            <button class="btn btn-small" data-class="first">First</button>
+                            <button class="btn btn-small" data-class="business">Business</button>
+                            <button class="btn btn-small" data-class="economy">Economy</button>
+                        </div>
+                    </div>
+                    <div class="seat-map-body" id="seat-map-body">
+                        <!-- Filled by JavaScript -->
+                    </div>
+                    <div class="seat-map-legend">
+                        <div class="legend-item">
+                            <div class="seat available"></div>
+                            <span>Available</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="seat selected"></div>
+                            <span>Selected</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="seat occupied"></div>
+                            <span>Occupied</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-primary" id="confirm-seat">Confirm Seat</button>
+                    <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div class="modal" id="confirmation-modal">
+            <div class="modal-header">
+                <h3 id="confirmation-title">Confirm Action</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmation-message">Are you sure you want to perform this action?</p>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-danger" id="confirm-action">Confirm</button>
+                    <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications Modal -->
+        <div class="modal" id="notifications-modal">
+            <div class="modal-header">
+                <h3>Notifications</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="notifications-list" id="notifications-list">
+                    <!-- Filled by JavaScript -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="mark-all-read">Mark All as Read</button>
+            </div>
+        </div>
+
+        <!-- Forgot Password Modal -->
+        <div class="modal" id="forgot-password-modal">
+            <div class="modal-header">
+                <h3>Reset Password</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="forgot-password-form">
+                    <div class="form-group">
+                        <label for="reset-email">Email</label>
+                        <input type="email" id="reset-email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Send Reset Link</button>
+                        <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Edit Item Modal -->
+        <div class="modal" id="edit-item-modal">
+            <div class="modal-header">
+                <h3 id="edit-item-title">Edit Item</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="edit-item-content">
+                <!-- Content will be dynamically generated -->
+            </div>
+        </div>
+
+        <!-- View Item Modal -->
+        <div class="modal" id="view-item-modal">
+            <div class="modal-header">
+                <h3 id="view-item-title">View Details</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="view-item-content">
+                <!-- Content will be dynamically generated -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close-modal">Close</button>
+                <button type="button" class="btn btn-primary" id="edit-from-view">Edit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
