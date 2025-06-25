@@ -13,7 +13,7 @@ Welcome to **Nure Store** – a stylish and responsive e-commerce website design
 - 📦 Real-time cart  
 - 💬 Customer testimonials 
 - 🔎 Live product 
-- 📱 Mobile-friendly and fully responsive layout
+- 📱 Mobile-friendly and fully 
 
 ## 📂 Project Structure<br>
 nure-tech-store/
