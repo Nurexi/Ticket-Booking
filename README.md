@@ -21,8 +21,7 @@ nure-tech-store/
 ├── index.html # Main HTML file<br>
 ├── styles.css # Custom CSS styling<br>
 ├── main.js # JavaScript for interactions and cart logic<br>
-├── /assets # (Optional) Folder for local images<br>
-└── README.md # You're reading it! <br>
+
 
 
 
