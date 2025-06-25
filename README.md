@@ -80,3 +80,26 @@ Clone the repository:
 ```bash
 git clone https://github.com/your-username/skywings-airline-booking.git
 cd skywings-airline-booking
+📌 Future Enhancements
+
+    Backend integration for real-time data
+
+    Role-based access (Admin, Staff, Customer)
+
+    REST API for flight and booking data
+
+    Payment integration (Stripe, PayPal)
+
+    Notification system and email alerts
+
+🧑‍💻 Author
+
+Nuredin Seid
+
+    GitHub: @Nurexi
+
+    Email: [your-email@example.com]
+
+📄 License
+
+This project is licensed under the MIT License.  
