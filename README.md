@@ -7,7 +7,7 @@ Welcome to **Nure Store** – a stylish and responsive e-commerce website design
 ## 🌟 Features
 
 -
-- 🧭 Smooth and responsive navigation bar
+- 🧭 Smooth and 
 - 💻 Interactive product listings for:
   - Gaming PCs
   - Laptops
