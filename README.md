@@ -1,29 +1,18 @@
-# 🛒 Nure | Your Premium Tech Store
+# ✈️ SkyWings - Airline Booking System
 
-Welcome to **Nure Store** – a stylish and responsive e-commerce website designed for premium tech lovers. This project showcases a modern tech store with stunning visuals, smooth animations, and interactive features using only **HTML**, **CSS**, and **JavaScript**.<div> 
+SkyWings is a modern, responsive, and feature-rich web application designed to streamline airline booking, flight management, and customer service operations. Built with HTML, CSS, and JavaScript, it offers an interactive interface, real-time statistics, and smooth animations to enhance both the user and admin experience.
 
- <!-- Replace with your actual screenshot path -->
-## 🌟 Features
-- 💻 Interactive product listings for:
-  - Gaming PCs
-  - Laptops
-  - Phones
-  
-- 🛍️ Fully functional cart 
-- 📦 Real-time cart  
-- 💬 Customer testimonials 
-- 🔎 Live product 
-- 📱 Mobile-friendly and fully 
+## 🚀 Live Demo
 
-## 📂 Project Structure<br>
-nure-tech-store/
-│<br>
+> 🔗 [Insert your live website link here]
 
-├── styles.css # Custom CSS styling<br>
-├── main.js # JavaScript for interactions and cart logic<br>
+---
 
+## 📸 Preview
 
+![SkyWings UI Screenshot](https://via.placeholder.com/1200x600)
 
+---
 
-📃 License<br>
-This project is open-source and available under the MIT License.
+## 📁 Project Structure
+
