@@ -28,12 +28,7 @@ nure-tech-store/
 ├── /assets # (Optional) Folder for local images<br>
 └── README.md # You're reading it! <br>
 
-🛠️ Technologies Used<br>
 
-HTML5 <br>
-CSS3 (with animations and transitions)<br>
-Vanilla JavaScript (DOM manipulation, localStorage, dynamic UI)<br>
-Google Fonts and Font Awesome icons <br>
 
 📃 License<br>
 This project is open-source and available under the MIT License.
