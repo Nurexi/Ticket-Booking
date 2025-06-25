@@ -9,7 +9,7 @@ Welcome to **Nure Store** – a stylish and responsive e-commerce website design
   - Laptops
   - Phones
   
-- 🛍️ Fully functional cart system using 
+- 🛍️ Fully functional cart 
 - 📦 Real-time cart updates 
 - 💬 Customer testimonials 
 - 🔎 Live product 
