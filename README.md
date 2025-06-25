@@ -9,9 +9,15 @@ SkyWings is a modern, responsive, and feature-rich web application designed to s
 
 ## 📸 Preview
 
-![SkyWings UI Screenshot](https://via.placeholder.com/1200x600)
+![Screenshot (40)](https://github.com/user-attachments/assets/00adc993-f694-4206-b052-596d4cd873ed)
+
 
 ---
 
 ## 📁 Project Structure
-
+SkyWings/
+│
+├── index.html # Main HTML file
+├── styles.css # All UI and layout styling
+├── script.js # Frontend logic and interaction
+└── assets/ # Optional: images, icons, etc.
