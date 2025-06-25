@@ -3,7 +3,6 @@
 Welcome to **Nure Store** – a stylish and responsive e-commerce website designed for premium tech lovers. This project showcases a modern tech store with stunning visuals, smooth animations, and interactive features using only **HTML**, **CSS**, and **JavaScript**.<div> 
 
  <!-- Replace with your actual screenshot path -->
-
 ## 🌟 Features
 - 💻 Interactive product listings for:
   - Gaming PCs
