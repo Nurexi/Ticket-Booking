@@ -12,7 +12,7 @@ Welcome to **Nure Store** – a stylish and responsive e-commerce website design
   - Gaming PCs
   - Laptops
   - Phones
-  - Tablets
+  
 - 🛍️ Fully functional cart system using `localStorage`
 - 📦 Real-time cart updates with animation
 - 💬 Customer testimonials carousel
