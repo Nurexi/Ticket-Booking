@@ -10,7 +10,7 @@ Welcome to **Nure Store** – a stylish and responsive e-commerce website design
   - Laptops
   - Phones
   
-- 🛍️ Fully functional cart system using `localStorage`
+- 🛍️ Fully functional cart system using 
 - 📦 Real-time cart updates with animation
 - 💬 Customer testimonials carousel
 - 🔎 Live product search simulation
