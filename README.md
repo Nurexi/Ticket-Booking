@@ -73,11 +73,6 @@ SkyWings/<br>
 
 ---
 
-## 📦 Installation
-
-Clone the repository:
-
-```bash
 
 
 
