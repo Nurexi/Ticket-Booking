@@ -84,7 +84,7 @@ cd skywings-airline-booking
 
   
 
-    REST API for flight and booking data
+    REST API for flight 
 
   
 
