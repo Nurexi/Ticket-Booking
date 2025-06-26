@@ -78,7 +78,7 @@ SkyWings/<br>
 Clone the repository:
 
 ```bash
-git clone https:/
+
 
 
 
