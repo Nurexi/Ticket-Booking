@@ -88,6 +88,6 @@ cd skywings-airline-booking
 
     Payment integration (Stripe, PayPal)
 
-    Notification system and email alerts
+    
 
 
