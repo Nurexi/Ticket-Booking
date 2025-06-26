@@ -79,7 +79,7 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/your-username/skywings-airline-booking.git
-cd skywings-airline-booking
+
 
 
   
