@@ -92,14 +92,4 @@ cd skywings-airline-booking
 
     Notification system and email alerts
 
-🧑‍💻 Author
 
-Nuredin Seid
-
-    GitHub: @Nurexi
-
-    Email: [your-email@example.com]
-
-📄 License
-
-This project is licensed under the MIT License.  
